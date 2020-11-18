@@ -5,6 +5,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import Logo from './components/Logo/Logo'
 import Navigation from './components/Navigation/Navigation'
 import Rank from './components/Rank/Rank'
+import SignIn from './components/SignIn/SignIn'
 
 const particlesOptions = {
   particles: {
@@ -121,6 +122,7 @@ function App() {
     <div className='App'>
       <Particles className='particles' params={particlesOptions} />
       <Navigation />
+      <SignIn />
       <Logo />
       <Rank />
       <ImageLinkForm />
