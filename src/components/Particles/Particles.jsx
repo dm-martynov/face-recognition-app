@@ -5,10 +5,10 @@ import './Particles.css'
 const particlesOptions = {
   particles: {
     number: {
-      value: 202,
+      value: 144,
       density: {
-        enable: false,
-        value_area: 2645.6299004281127,
+        enable: true,
+        value_area: 641.3648243462085,
       },
     },
     color: {
@@ -21,7 +21,7 @@ const particlesOptions = {
         color: '#000000',
       },
       polygon: {
-        nb_sides: 4,
+        nb_sides: 5,
       },
       image: {
         src: 'img/github.svg',
@@ -30,18 +30,18 @@ const particlesOptions = {
       },
     },
     opacity: {
-      value: 0.5451601006942772,
+      value: 0.5,
       random: false,
       anim: {
         enable: false,
-        speed: 1.8677775882930938,
-        opacity_min: 0.17865698670629593,
+        speed: 1,
+        opacity_min: 0.1,
         sync: false,
       },
     },
     size: {
-      value: 2,
-      random: false,
+      value: 3,
+      random: true,
       anim: {
         enable: false,
         speed: 40,
@@ -51,23 +51,23 @@ const particlesOptions = {
     },
     line_linked: {
       enable: true,
-      distance: 160.34120608655215,
+      distance: 150,
       color: '#ffffff',
-      opacity: 0.3687847739990699,
-      width: 1.282729648692417,
+      opacity: 0.4,
+      width: 1,
     },
     move: {
       enable: true,
-      speed: 4.810236182596564,
+      speed: 6,
       direction: 'none',
-      random: true,
+      random: false,
       straight: false,
-      out_mode: 'bounce',
+      out_mode: 'out',
       bounce: false,
       attract: {
-        enable: true,
-        rotateX: 1443.070854778969,
-        rotateY: 1282.729648692417,
+        enable: false,
+        rotateX: 600,
+        rotateY: 1200,
       },
     },
   },
@@ -75,11 +75,11 @@ const particlesOptions = {
     detect_on: 'canvas',
     events: {
       onhover: {
-        enable: true,
-        mode: 'grab',
+        enable: false,
+        mode: 'repulse',
       },
       onclick: {
-        enable: true,
+        enable: false,
         mode: 'push',
       },
       resize: true,

@@ -1,9 +1,10 @@
 import './App.css'
 import React from 'react'
 import MainPage from './pages/MainPage/MainPage'
-import SignIn from './pages/SignIn/SignIn'
+import SignInPage from './pages/SignInPage/SignInPage'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 
 function App() {
   const currentUser = useSelector((state) => state.userReducer.currentUser)
@@ -18,7 +19,8 @@ function App() {
           }
         />
 
-        <Route exact path='/signin' render={() => <SignIn />} />
+        <Route exact path='/signin' render={() => <SignInPage />} />
+        <Route exact path='/register' render={() => <RegistrationPage />} />
       </Switch>
     </div>
   )
