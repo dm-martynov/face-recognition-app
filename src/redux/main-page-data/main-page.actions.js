@@ -12,7 +12,9 @@ export const faceRecognitionFailure = (error) => ({
   payload: error,
 })
 
-export const faceRecognitionSuccess = (result) => ({
-  type: MainPageActionTypes.FACE_RECOGNITION_SUCCESS,
-  payload: result,
-})
+export const faceRecognitionSuccess = (result) => {
+  return {
+    type: MainPageActionTypes.FACE_RECOGNITION_SUCCESS,
+    payload: result,
+  }
+}

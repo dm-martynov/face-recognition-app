@@ -1,5 +1,6 @@
 import Particles from 'react-particles-js'
 import './App.css'
+import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import Logo from './components/Logo/Logo'
 import Navigation from './components/Navigation/Navigation'
@@ -123,7 +124,7 @@ function App() {
       <Logo />
       <Rank />
       <ImageLinkForm />
-      {/* <FaceRecognition /> */}
+      <FaceRecognition />
     </div>
   )
 }

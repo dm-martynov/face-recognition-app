@@ -8,7 +8,6 @@ import {
 import detectFace from '../../clarifai/clarifai'
 
 export function* faceRecognition({ payload: { urlInput } }) {
-  debugger
   try {
     const result = yield detectFace(urlInput)
     yield put(faceRecognitionSuccess(result))
