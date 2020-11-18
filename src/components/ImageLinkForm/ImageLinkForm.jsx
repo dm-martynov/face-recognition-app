@@ -1,15 +1,18 @@
 import React from 'react'
 import { useFormik } from 'formik'
+import { useDispatch } from 'react-redux'
 
 import './ImageLinkForm.css'
+import { faceRecognitionStart } from '../../redux/main-page-data/main-page.actions'
 
 const ImageLinkForm = () => {
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       urlInput: '',
     },
-    onSubmit: (values) => {
-      console.log('Form data', values)
+    onSubmit: (value) => {
+      dispatch(faceRecognitionStart(value))
     },
   })
 
