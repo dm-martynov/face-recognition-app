@@ -1,8 +1,11 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
+import { useDispatch } from 'react-redux'
+import { signUpStart } from '../../redux/user/user.actions'
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch()
   return (
     <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center'>
       <Formik
@@ -10,6 +13,7 @@ const RegistrationForm = () => {
         initialValues={{ email: '', password: '', name: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log('Form data', values)
+          dispatch(signUpStart(values))
           resetForm()
           setSubmitting(false)
         }}

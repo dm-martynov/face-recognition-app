@@ -2,10 +2,12 @@ import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup'
+import { useDispatch } from 'react-redux'
+import { signInStart } from '../../redux/user/user.actions'
 
 const SignInForm = () => {
-  let history = useHistory()
-
+  const history = useHistory()
+  const dispatch = useDispatch()
   return (
     <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center'>
       <Formik
@@ -13,6 +15,7 @@ const SignInForm = () => {
         initialValues={{ email: '', password: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log('Form data', values)
+          dispatch(signInStart(values))
           resetForm()
           setSubmitting(false)
         }}

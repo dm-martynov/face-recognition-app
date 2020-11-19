@@ -1,9 +1,17 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { signOutStart } from '../../redux/user/user.actions'
 
 const Navigation = () => {
+  const dispatch = useDispatch()
   return (
     <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <p className='f3 link, dim black underline pa3 pointer'>Sign out</p>
+      <p
+        onClick={() => dispatch(signOutStart())}
+        className='f3 link, dim black underline pa3 pointer'
+      >
+        Sign out
+      </p>
     </nav>
   )
 }
