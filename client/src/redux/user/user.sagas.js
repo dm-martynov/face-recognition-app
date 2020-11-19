@@ -18,6 +18,7 @@ export function* signOut() {
 }
 
 export function* signIn({ payload: { email, password } }) {
+  console.log(email, password)
   try {
     const result = yield signInRequest(email, password)
     yield put(signOutSuccess())
@@ -49,5 +50,5 @@ export function* onSignOutStart() {
 }
 
 export function* userSagas() {
-  yield all([call(onSignUpStart), call(onSignUpStart), call(onSignOutStart)])
+  yield all([call(onSignUpStart), call(onSignInStart), call(onSignOutStart)])
 }

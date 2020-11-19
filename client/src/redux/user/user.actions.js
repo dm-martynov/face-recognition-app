@@ -1,6 +1,7 @@
 import UserActionTypes from './user.types'
 
 export const signInStart = (emailAndPassword) => {
+  console.log(emailAndPassword)
   return {
     type: UserActionTypes.SIGN_IN_START,
     payload: emailAndPassword,

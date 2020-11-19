@@ -15,6 +15,7 @@ const SignInForm = () => {
         initialValues={{ email: '', password: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log('Form data', values)
+
           dispatch(signInStart(values))
           resetForm()
           setSubmitting(false)
@@ -68,7 +69,7 @@ const SignInForm = () => {
                 className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
                 type='submit'
                 value='Sign in'
-                disabled={!!errors}
+                disabled={!(Object.keys(errors).length === 0)}
               />
             </div>
             <div className='lh-copy mt3'>
