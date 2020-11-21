@@ -1,7 +1,8 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const cors = require('cors')
-
+const db = require('./database')
+const { response } = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 
@@ -47,15 +48,17 @@ app.post('/api/signin', (req, res) => {
 
 app.post('/api/register', (req, res) => {
   const { name, email, password } = req.body
-  database.users.push({
-    id: '125',
-    name: name,
-    email: email,
-    password: password,
-    entries: 0,
-    joined: new Date(),
-  })
-  res.json(database.users[database.users.length - 1])
+  db('users')
+    .returning('*')
+    .insert({
+      email: email,
+      name: name,
+      joined: new Date(),
+    })
+    .then((user) => {
+      res.json(user[0])
+    })
+    .catch((err) => res.status(400).json('unable to register'))
 })
 
 app.get('/api/profile/:id', (req, res) => {
