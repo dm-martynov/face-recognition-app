@@ -1,41 +1,11 @@
 import UserActionTypes from './user.types'
 
-export const signInStart = (emailAndPassword) => {
+export const signInStart = (userData) => {
   return {
     type: UserActionTypes.SIGN_IN_START,
-    payload: emailAndPassword,
+    payload: userData,
   }
 }
-
-export const signInFailure = (error) => ({
-  type: UserActionTypes.SIGN_IN_FAILURE,
-  payload: error,
-})
-
-export const signInSuccess = (user) => ({
-  type: UserActionTypes.SIGN_IN_SUCCESS,
-  payload: user,
-})
-
-export const checkUserSession = () => ({
-  type: UserActionTypes.CHECK_USER_SESSION,
-})
-
-export const signOutStart = () => ({
-  type: UserActionTypes.SIGN_OUT_START,
-})
-
-export const signOutSuccess = () => {
-  return {
-    type: UserActionTypes.SIGN_OUT_SUCCESS,
-  }
-}
-
-export const signOutFailure = (error) => ({
-  type: UserActionTypes.SIGN_OUT_FAILURE,
-  payload: error,
-})
-
 export const signUpStart = (userData) => {
   return {
     type: UserActionTypes.SIGN_UP_START,
@@ -43,14 +13,33 @@ export const signUpStart = (userData) => {
   }
 }
 
-export const signUpSuccess = (user) => {
+export const updateUserStart = (id) => {
   return {
-    type: UserActionTypes.SIGN_UP_SUCCESS,
-    payload: user,
+    type: UserActionTypes.UPDATE_USER_START,
+    payload: id,
+  }
+}
+export const updateUserSuccess = (entries) => {
+  return {
+    type: UserActionTypes.UPDATE_USER_SUCCESS,
+    payload: entries,
   }
 }
 
-export const signUpFailure = (error) => ({
-  type: UserActionTypes.SIGN_UP_FAILURE,
+export const userOperationSuccess = (userData) => ({
+  type: UserActionTypes.USER_OPERATION_SUCCESS,
+  payload: userData,
+})
+
+export const userOperationFailure = (error) => ({
+  type: UserActionTypes.USER_OPERATION_FAILURE,
   payload: error,
+})
+
+export const checkUserSession = () => ({
+  type: UserActionTypes.CHECK_USER_SESSION,
+})
+
+export const signOut = () => ({
+  type: UserActionTypes.SIGN_OUT,
 })

@@ -6,26 +6,11 @@ const { response } = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 
-const database = {
-  users: [
-    {
-      id: '123456',
-      name: 'John',
-      email: '123@1.com',
-      password: '123456',
-      entries: 0,
-      joined: new Date(),
-    },
-    {
-      id: '124',
-      name: 'Dima',
-      email: 'dima@gmail.com',
-      password: 'abraasd',
-      entries: 0,
-      joined: new Date(),
-    },
-  ],
-}
+bcrypt.genSalt(10, function (err, salt) {
+  bcrypt.hash('B4c0//', salt, function (err, hash) {
+    // Store hash in your password DB.
+  })
+})
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -36,30 +21,54 @@ app.get('/api/', (req, res) => {
 })
 
 app.post('/api/signin', (req, res) => {
-  if (
-    req.body.email === database.users[0].email &&
-    req.body.password === database.users[0].password
-  ) {
-    res.json('success')
-  } else {
-    res.status(400).json('error logging in')
-  }
+  db.select('email', 'hash')
+    .from('login')
+    .where('email', '=', req.body.email)
+    .then((data) => {
+      const isValid = bcrypt.compareSync(req.body.password, data[0].hash)
+      if (isValid) {
+        return db
+          .select('*')
+          .from('users')
+          .where('email', '=', req.body.email)
+          .then((user) => {
+            res.json(user[0])
+          })
+          .catch((err) => res.status(400).json('unable to get user'))
+      } else {
+        res.status(400).json('wrong credentials')
+      }
+    })
+    .catch((err) => res.status(400).json('wrong credentials'))
 })
 
 app.post('/api/register', (req, res) => {
-  console.log(req.body)
   const { name, email, password } = req.body
-  db('users')
-    .returning('*')
-    .insert({
-      email: email,
-      name: name,
-      joined: new Date(),
-    })
-    .then((user) => {
-      res.json(user[0])
-    })
-    .catch((err) => res.status(400).json('Unable to register'))
+  const salt = bcrypt.genSaltSync(10)
+  const hash = bcrypt.hashSync(password, salt)
+  db.transaction((trx) => {
+    trx
+      .insert({
+        hash,
+        email,
+      })
+      .into('login')
+      .returning('email')
+      .then((logEmail) => {
+        return trx('users')
+          .returning('*')
+          .insert({
+            email: logEmail[0],
+            name: name,
+            joined: new Date(),
+          })
+          .then((user) => {
+            res.json(user[0])
+          })
+      })
+      .then(trx.commit)
+      .catch(trx.rollback)
+  }).catch((err) => res.status(400).json('Unable to register'))
 })
 
 app.get('/api/profile/:id', (req, res) => {

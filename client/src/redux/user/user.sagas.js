@@ -1,28 +1,19 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects'
-import { signOutRequest, signUpRequest, signInRequest } from '../../api/api'
+import { signUpRequest, signInRequest, userUpdateRequest } from '../../api/api'
 import {
   signInStart,
-  signOutFailure,
-  signOutSuccess,
-  signUpFailure,
+  updateUserSuccess,
+  userOperationFailure,
+  userOperationSuccess,
 } from './user.actions'
 import UserActionTypes from './user.types'
-
-export function* signOut() {
-  try {
-    const result = yield signOutRequest()
-    yield put(signOutSuccess())
-  } catch (error) {
-    yield put(signOutFailure(error))
-  }
-}
 
 export function* signIn({ payload: { email, password } }) {
   try {
     const result = yield signInRequest(email, password)
-    yield put(signOutSuccess())
+    yield put(userOperationSuccess(result.data))
   } catch (error) {
-    yield put(signOutFailure(error))
+    yield put(userOperationFailure(error))
   }
 }
 
@@ -31,7 +22,16 @@ export function* signUp({ payload: { name, email, password } }) {
     yield signUpRequest(name, email, password)
     yield put(signInStart({ email, password }))
   } catch (error) {
-    yield put(signUpFailure(error))
+    yield put(userOperationFailure(error))
+  }
+}
+
+export function* userUpdate({ payload }) {
+  try {
+    const result = yield userUpdateRequest(payload)
+    yield put(updateUserSuccess(result))
+  } catch (error) {
+    yield put(userOperationFailure(error))
   }
 }
 
@@ -43,10 +43,10 @@ export function* onSignInStart() {
   yield takeLatest(UserActionTypes.SIGN_IN_START, signIn)
 }
 
-export function* onSignOutStart() {
-  yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
+export function* onUpdateUserStart() {
+  yield takeLatest(UserActionTypes.UPDATE_USER_START, userUpdate)
 }
 
 export function* userSagas() {
-  yield all([call(onSignUpStart), call(onSignInStart), call(onSignOutStart)])
+  yield all([call(onSignUpStart), call(onSignInStart), call(onUpdateUserStart)])
 }

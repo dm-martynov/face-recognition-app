@@ -5,10 +5,10 @@ import './Particles.css'
 const particlesOptions = {
   particles: {
     number: {
-      value: 144,
+      value: 35,
       density: {
         enable: true,
-        value_area: 641.3648243462085,
+        value_area: 500.3648243462085,
       },
     },
     color: {
@@ -21,7 +21,7 @@ const particlesOptions = {
         color: '#000000',
       },
       polygon: {
-        nb_sides: 5,
+        nb_sides: 4,
       },
       image: {
         src: 'img/github.svg',
@@ -44,7 +44,7 @@ const particlesOptions = {
       random: true,
       anim: {
         enable: false,
-        speed: 40,
+        speed: 30,
         size_min: 0.1,
         sync: false,
       },
@@ -58,7 +58,7 @@ const particlesOptions = {
     },
     move: {
       enable: true,
-      speed: 6,
+      speed: 4,
       direction: 'none',
       random: false,
       straight: false,
@@ -82,7 +82,7 @@ const particlesOptions = {
         enable: false,
         mode: 'push',
       },
-      resize: true,
+      resize: false,
     },
     modes: {
       grab: {

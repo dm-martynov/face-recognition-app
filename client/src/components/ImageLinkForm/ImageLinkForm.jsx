@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import './ImageLinkForm.css'
 import { faceRecognitionStart } from '../../redux/main-page-data/main-page.actions'
-import { updateProfileStart } from '../../redux/profile/profile.actions'
+import { updateUserStart } from '../../redux/user/user.actions'
 
 const ImageLinkForm = () => {
-  const userId = useSelector((state) => state.userReducer.currentUser.id)
+  const id = useSelector((state) => state.userReducer.currentUser.id)
   const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
@@ -15,7 +15,7 @@ const ImageLinkForm = () => {
     },
     onSubmit: (value) => {
       dispatch(faceRecognitionStart(value))
-      dispatch(updateProfileStart(userId))
+      dispatch(updateUserStart(id))
     },
   })
 

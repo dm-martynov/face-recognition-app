@@ -8,7 +8,7 @@ const Rank = () => {
   return (
     <div>
       <div className='white f3'>{`${currentUser.name}, your current rank is`}</div>
-      <div className='white f1'>{`${currentUser.rank}`}</div>
+      <div className='white f1'>{`${currentUser.entries}`}</div>
     </div>
   )
 }

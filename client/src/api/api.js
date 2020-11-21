@@ -22,14 +22,13 @@ export const signInRequest = async (email, password) => {
       password: password,
     })
 
-    alert(response)
     return response
   } catch (error) {
     alert(error)
   }
 }
 
-export const updateProfileRequest = async (userId) => {
+export const userUpdateRequest = async (userId) => {
   try {
     const response = await axios.put(`http://localhost:5000/api/image/}`, {
       userId,

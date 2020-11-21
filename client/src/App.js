@@ -18,9 +18,18 @@ function App() {
             currentUser ? <MainPage /> : <Redirect to='/signin' />
           }
         />
-
-        <Route exact path='/signin' render={() => <SignInPage />} />
-        <Route exact path='/register' render={() => <RegistrationPage />} />
+        <Route
+          exact
+          path='/signin'
+          render={() => (!currentUser ? <SignInPage /> : <Redirect to='/' />)}
+        />
+        <Route
+          exact
+          path='/register'
+          render={() =>
+            !currentUser ? <RegistrationPage /> : <Redirect to='/' />
+          }
+        />
       </Switch>
     </div>
   )
