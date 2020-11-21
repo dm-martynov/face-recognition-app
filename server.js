@@ -93,7 +93,7 @@ app.put('/api/image', (req, res) => {
     .then((entries) => res.json(entries[0]))
     .catch((err) => {
       console.log(err)
-      res.status(400).json('Unable to get entries')
+      res.status(400).json(err)
     })
 })
 

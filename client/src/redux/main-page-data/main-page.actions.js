@@ -18,3 +18,9 @@ export const faceRecognitionSuccess = (result) => {
     payload: result,
   }
 }
+
+export const clearFacesData = () => {
+  return {
+    type: MainPageActionTypes.CLEAR_FACES_DATA,
+  }
+}

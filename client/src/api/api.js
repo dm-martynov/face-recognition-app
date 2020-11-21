@@ -30,8 +30,8 @@ export const signInRequest = async (email, password) => {
 
 export const userUpdateRequest = async (userId) => {
   try {
-    const response = await axios.put(`http://localhost:5000/api/image/}`, {
-      userId,
+    const response = await axios.put(`http://localhost:5000/api/image/`, {
+      userId: userId,
     })
     return response
   } catch (error) {

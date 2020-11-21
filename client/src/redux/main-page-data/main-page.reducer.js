@@ -27,6 +27,13 @@ const mainPageReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: action.payload,
       }
+    case MainPageActionTypes.CLEAR_FACES_DATA:
+      return {
+        ...state,
+        error: null,
+        imageUrl: null,
+        box: null,
+      }
 
     default:
       return state

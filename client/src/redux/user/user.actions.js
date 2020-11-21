@@ -13,15 +13,15 @@ export const signUpStart = (userData) => {
   }
 }
 
-export const updateUserStart = (id) => {
+export const userUpdateStart = (id) => {
   return {
-    type: UserActionTypes.UPDATE_USER_START,
+    type: UserActionTypes.USER_UPDATE_START,
     payload: id,
   }
 }
-export const updateUserSuccess = (entries) => {
+export const userUpdateSuccess = (entries) => {
   return {
-    type: UserActionTypes.UPDATE_USER_SUCCESS,
+    type: UserActionTypes.USER_UPDATE_SUCCESS,
     payload: entries,
   }
 }

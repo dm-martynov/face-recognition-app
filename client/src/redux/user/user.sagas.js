@@ -2,7 +2,7 @@ import { takeLatest, put, all, call } from 'redux-saga/effects'
 import { signUpRequest, signInRequest, userUpdateRequest } from '../../api/api'
 import {
   signInStart,
-  updateUserSuccess,
+  userUpdateSuccess,
   userOperationFailure,
   userOperationSuccess,
 } from './user.actions'
@@ -29,7 +29,7 @@ export function* signUp({ payload: { name, email, password } }) {
 export function* userUpdate({ payload }) {
   try {
     const result = yield userUpdateRequest(payload)
-    yield put(updateUserSuccess(result))
+    yield put(userUpdateSuccess(result.data))
   } catch (error) {
     yield put(userOperationFailure(error))
   }
@@ -43,10 +43,10 @@ export function* onSignInStart() {
   yield takeLatest(UserActionTypes.SIGN_IN_START, signIn)
 }
 
-export function* onUpdateUserStart() {
-  yield takeLatest(UserActionTypes.UPDATE_USER_START, userUpdate)
+export function* onUserUpdateStart() {
+  yield takeLatest(UserActionTypes.USER_UPDATE_START, userUpdate)
 }
 
 export function* userSagas() {
-  yield all([call(onSignUpStart), call(onSignInStart), call(onUpdateUserStart)])
+  yield all([call(onSignUpStart), call(onSignInStart), call(onUserUpdateStart)])
 }
