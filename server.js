@@ -43,7 +43,6 @@ app.post('/api/signin', (req, res) => {
   } else {
     res.status(400).json('error logging in')
   }
-  res.json('signin')
 })
 
 app.post('/api/register', (req, res) => {
@@ -52,7 +51,7 @@ app.post('/api/register', (req, res) => {
     id: '125',
     name: name,
     email: email,
-    password: 'cookies',
+    password: password,
     entries: 0,
     joined: new Date(),
   })
@@ -74,10 +73,10 @@ app.get('/api/profile/:id', (req, res) => {
 })
 
 app.put('/api/image', (res, req) => {
-  const { id } = req.body
+  const { userId } = req.body
   let found = false
   database.users.forEach((user) => {
-    if (user.id === id) {
+    if (user.id === userId) {
       found = true
       user.entries++
       return res.json(user.entries)

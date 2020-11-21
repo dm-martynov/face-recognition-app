@@ -12,7 +12,6 @@ const RegistrationForm = () => {
         className='pa4 black-80'
         initialValues={{ email: '', password: '', name: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          console.log('Form data', values)
           dispatch(signUpStart(values))
           resetForm()
           setSubmitting(false)

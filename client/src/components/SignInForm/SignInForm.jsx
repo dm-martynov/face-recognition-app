@@ -14,8 +14,6 @@ const SignInForm = () => {
         className='pa4 black-80'
         initialValues={{ email: '', password: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          console.log('Form data', values)
-
           dispatch(signInStart(values))
           resetForm()
           setSubmitting(false)

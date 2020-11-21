@@ -18,7 +18,6 @@ export function* signOut() {
 }
 
 export function* signIn({ payload: { email, password } }) {
-  console.log(email, password)
   try {
     const result = yield signInRequest(email, password)
     yield put(signOutSuccess())
@@ -27,10 +26,9 @@ export function* signIn({ payload: { email, password } }) {
   }
 }
 
-export function* signUp({ payload: { displayName, email, password } }) {
+export function* signUp({ payload: { name, email, password } }) {
   try {
-    const result = yield signUpRequest(displayName, email, password)
-
+    const result = yield signUpRequest(name, email, password)
     yield put(signInStart({ email, password }))
   } catch (error) {
     yield put(signUpFailure(error))

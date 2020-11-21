@@ -25,11 +25,11 @@ const detectFace = (url) => {
   return app.models
     .predict('53e1df302c079b3db8a0a36033ed2d15', url)
     .then((response) => {
-      console.log(response)
       return calculateFaceLocation(response.outputs[0].data.regions)
     })
+
     .catch((err) => {
-      console.log(err)
+      alert(err)
     })
 }
 
