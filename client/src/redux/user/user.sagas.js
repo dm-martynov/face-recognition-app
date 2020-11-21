@@ -28,7 +28,7 @@ export function* signIn({ payload: { email, password } }) {
 
 export function* signUp({ payload: { name, email, password } }) {
   try {
-    const result = yield signUpRequest(name, email, password)
+    yield signUpRequest(name, email, password)
     yield put(signInStart({ email, password }))
   } catch (error) {
     yield put(signUpFailure(error))

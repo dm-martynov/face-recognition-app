@@ -7,8 +7,6 @@ export const signUpRequest = async (name, email, password) => {
       email: email,
       password: password,
     })
-
-    alert(response)
     return response
   } catch (error) {
     alert(error)

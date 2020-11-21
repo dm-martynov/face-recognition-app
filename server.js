@@ -47,6 +47,7 @@ app.post('/api/signin', (req, res) => {
 })
 
 app.post('/api/register', (req, res) => {
+  console.log(req.body)
   const { name, email, password } = req.body
   db('users')
     .returning('*')
@@ -58,36 +59,33 @@ app.post('/api/register', (req, res) => {
     .then((user) => {
       res.json(user[0])
     })
-    .catch((err) => res.status(400).json('unable to register'))
+    .catch((err) => res.status(400).json('Unable to register'))
 })
 
 app.get('/api/profile/:id', (req, res) => {
   const { id } = req.params
-  let found = false
-  database.users.forEach((user) => {
-    if (user.id === id) {
-      found = true
-      return res.json(user)
-    }
-  })
-  if (!found) {
-    res.status(400).json('not found')
-  }
+  db.select('*')
+    .from('users')
+    .where({ id })
+    .then((user) => {
+      if (user.length) {
+        res.json(user[0])
+      } else res.status(400).json('Not found')
+    })
+    .catch((err) => res.status(400).json('Error getting user'))
 })
 
-app.put('/api/image', (res, req) => {
+app.put('/api/image', (req, res) => {
   const { userId } = req.body
-  let found = false
-  database.users.forEach((user) => {
-    if (user.id === userId) {
-      found = true
-      user.entries++
-      return res.json(user.entries)
-    }
-  })
-  if (!found) {
-    res.status(400).json('not found')
-  }
+  db('users')
+    .where('id', '=', userId)
+    .increment('entries', 1)
+    .returning('entries')
+    .then((entries) => res.json(entries[0]))
+    .catch((err) => {
+      console.log(err)
+      res.status(400).json('Unable to get entries')
+    })
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
