@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './ImageLinkForm.css'
-import {
-  clearFacesData,
-  faceRecognitionStart,
-} from '../../redux/main-page-data/main-page.actions'
+import { faceRecognitionStart } from '../../redux/main-page-data/main-page.actions'
 import { userUpdateStart } from '../../redux/user/user.actions'
 
 const ImageLinkForm = () => {
@@ -21,12 +18,6 @@ const ImageLinkForm = () => {
       dispatch(userUpdateStart(id))
     },
   })
-
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(clearFacesData())
-  //   }
-  // })
 
   return (
     <div className='ma4 mt0'>

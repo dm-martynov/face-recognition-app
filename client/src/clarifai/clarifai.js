@@ -1,8 +1,4 @@
-import Clarifai from 'clarifai'
-
-const app = new Clarifai.App({
-  apiKey: '7ce7664ce50044fd8afa34592eb44d45',
-})
+import axios from 'axios'
 
 const calculateFaceLocation = (regions) => {
   const image = document.getElementById('inputimage')
@@ -21,16 +17,13 @@ const calculateFaceLocation = (regions) => {
   return clarifaiFaces
 }
 
-const detectFace = (url) => {
-  return app.models
-    .predict('53e1df302c079b3db8a0a36033ed2d15', url)
-    .then((response) => {
-      return calculateFaceLocation(response.outputs[0].data.regions)
+export const detectFace = async (url) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/imageurl', {
+      url: url,
     })
-
-    .catch((err) => {
-      alert(err)
-    })
+    return calculateFaceLocation(response.data.outputs[0].data.regions)
+  } catch (error) {
+    alert(error)
+  }
 }
-
-export default detectFace

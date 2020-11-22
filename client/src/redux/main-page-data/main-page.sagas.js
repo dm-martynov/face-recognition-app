@@ -5,7 +5,7 @@ import {
   faceRecognitionSuccess,
   faceRecognitionFailure,
 } from './main-page.actions'
-import detectFace from '../../clarifai/clarifai'
+import { detectFace } from '../../clarifai/clarifai'
 
 export function* faceRecognition({ payload: { urlInput } }) {
   try {
