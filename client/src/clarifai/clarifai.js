@@ -19,7 +19,7 @@ const calculateFaceLocation = (regions) => {
 
 export const detectFace = async (url) => {
   try {
-    const response = await axios.post('http://localhost:5000/api/imageurl', {
+    const response = await axios.post('api/imageurl', {
       url: url,
     })
     return calculateFaceLocation(response.data.outputs[0].data.regions)
